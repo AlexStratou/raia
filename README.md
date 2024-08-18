@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-![PyPi](https://img.shields.io/pypi/v/raia.svg)
+[![PyPi](https://img.shields.io/pypi/v/raia.svg)](https://pypi.org/project/raia/)
 ![versions](https://img.shields.io/pypi/pyversions/raia.svg)
 # Raia
 Simplistic python package to print colored and/or styled text with a user friendly API.
