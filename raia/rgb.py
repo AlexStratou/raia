@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug 15 14:42:31 2024
+Created on Thu Aug 2024
 Author: Alexandros Stratoudakis
 e-mail: alexstrat4@gmail.com
+Licence: MIT
  
 Module with class definitions of all the Formatter objects.
 """
@@ -24,6 +25,37 @@ styles = {
     "inverse": '7',
     "hidden": '8',
     "strikethrough": '9',
+}
+
+defaults = {
+    # Dictionary with some default colors in RGB
+    "Black": (0, 0, 0),
+    "White": (255, 255, 255),
+    "Red": (255, 0, 0),
+    "Lime": (0, 255, 0),
+    "Blue": (0, 0, 255),
+    "Yellow": (255, 255, 0),
+    "Cyan": (0, 255, 255),
+    "Magenta": (255, 0, 255),
+    "Silver": (192, 192, 192),
+    "Gray": (128, 128, 128),
+    "Maroon": (128, 0, 0),
+    "Olive": (128, 128, 0),
+    "Green": (0, 128, 0),
+    "Purple": (128, 0, 128),
+    "Teal": (0, 128, 128),
+    "Navy": (0, 0, 128),
+    "Orange": (255, 165, 0),
+    "Brown": (165, 42, 42),
+    "Pink": (255, 192, 203),
+    "Gold": (255, 215, 0),
+    "LightBlue": (173, 216, 230),
+    "Violet": (238, 130, 238),
+    "Indigo": (75, 0, 130),
+    "Turquoise": (64, 224, 208),
+    "Salmon": (250, 128, 114),
+    "Beige": (245, 245, 220),
+    "Lavender": (230, 230, 250)
 }
 
 
@@ -80,23 +112,22 @@ class Formatter:
 class Style(Formatter):
     """Text style Formatter class."""
 
-    def __init__(self, style: tuple[str] | list[str]):
+    def __init__(self, *args: str):
         """
         Initializer of the Style class. It uses the input to initialize the Formatter
         parent class.
 
         Args:
-            style (tuple[str] | list[str]): Iterable containing style keys, as defined
-            in rea.rgb.styles.keys().
+            *args (str): Keywords for styles, as defined on rea.rgb.styles.keys().
 
         Returns:
             None.
 
         """
         formatter = CSI
-        for i, st in enumerate(style):
+        for i, st in enumerate(args):
             if i == 0:
-                deli = '' # to not include ';' on the first style code.
+                deli = ''  # to not include ';' on the first style code.
             else:
                 deli = ';'
             formatter += deli + styles.get(st, '')
@@ -141,7 +172,7 @@ class FullStyle(Formatter):
     """Class that combines Color, background Color and Style Formatters"""
 
     def __init__(self, foreground: Color | tuple[int, int, int] = None,
-                 background: Color | tuple[int, int, int] = None, style: Style | tuple[str] = None):
+                 background: Color | tuple[int, int, int] = None, style: Style | tuple[str] | str = None):
         """
         Initializer of the FullStyle Formatter.
 
@@ -150,8 +181,8 @@ class FullStyle(Formatter):
             a rea.rgb.Color object or an iterable with the 3 RGB codes.
             background (Color | tuple[int, int, int]): The background color. The input can either be
             a rea.rgb.Color(as_background=True) object or an iterable with the 3 RGB codes.
-            style (Style | tuple[str]): The style. The input can be either a rea.rgb.Style object or
-            an iterable containing keys from rea.rgb.styles.keys().
+            style (Style | tuple[str] | str): The style. The input can be either a rea.rgb.Style object or
+            an iterable containing keys from rea.rgb.styles.keys(). If a single key is given, it needs not be in a tuple.
 
         Raises:
             ValueError: When the input cannot be interpreted.
@@ -187,8 +218,12 @@ class FullStyle(Formatter):
             style_format = style.FORMATTER
         elif style == None:
             style_format = ''
-        elif isinstance(style, (list, tuple)):
-            style_format = Style(style=style).FORMATTER
+        elif isinstance(style,  (str, tuple)):
+            if isinstance(style, str):
+                style_format = Style(style).FORMATTER
+            else:
+                # unpack if tuple (v0.2)
+                style_format = Style(*style).FORMATTER
 
         else:
             raise ValueError("style must be a rea.Style object or an iterable of styles's keywords.\
@@ -199,4 +234,4 @@ class FullStyle(Formatter):
 
 
 # what to include with * import of the file
-__all__ = ['Formatter', 'Color', 'Style', 'FullStyle', 'styles']
+__all__ = ['Formatter', 'Color', 'Style', 'FullStyle', 'styles', 'defaults']

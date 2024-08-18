@@ -12,19 +12,22 @@ print("Package name: "+raia.__name__)
 print("Version: " + raia.__version__)
 
 # Default colors
-print(raia.Red("Default 'Red' as foreground"))
-print(raia.Blue_bg("Default 'Blue' as background"))
+print(raia.Red("Default 'Red' as foreground."))
+print(raia.Blue_bg("Default 'Blue' as background."))
 
 # Custom color
 myColor = raia.Color(0, 150, 150)
-print(myColor("Custom foreground color"))
+print(myColor("Custom foreground color."))
 
 # Custom background
 myBackground = raia.Color(255, 0, 150, as_background=True)
-myBackground.fprint('This is a custom background color')
+myBackground.fprint('This is a custom background color.')
+
+# Default style
+print(raia.Strikethrough('This is a default style.'))
 
 # Custom style
-myStyle = raia.Style(['underline', 'italic','bold'])
+myStyle = raia.Style('underline', 'italic', 'bold')
 myStyle.fprint('This is a custom style.')
 
 # Custom Full-Style
