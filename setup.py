@@ -14,6 +14,7 @@ setup_info = dict(
     name='raia',
     version=info['__version__'],
     author='Alexandros Stratoudakis',
+    long_description_content_type='text/markdown',
     author_email='alexstrat4@gmail.com',
     url='https://github.com/AlexStratou/raia',
     download_url='https://github.com/AlexStratou/raia/archive/refs/tags/v0.1.0.zip',
