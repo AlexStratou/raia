@@ -68,7 +68,7 @@ print(raia.Brown_bg('Available styles keys:\n'), raia.styles.keys())
 ```
 Output:
 
-<img width="572" alt="image" src="https://github.com/user-attachments/assets/d53079df-5a71-4bb9-aa44-0d6750a6a0a7">
+<img width="580" alt="image" src="https://github.com/user-attachments/assets/ac304761-98d5-4446-acda-7d3df64e47f8">
 
 
 
