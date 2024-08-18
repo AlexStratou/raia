@@ -5,7 +5,11 @@ Simplistic python package to print colored and/or styled text with a user friend
 raia is a simplistic python package that intends to provide a user friendly API for printing formatted text on the terminal. To do so, raia uses ANSI RGB codes (as many similar packages do). Truecolor ANSI support of the running terminal is assumed.
 
 ## 2. Installation
-*TODO*
+Using pip,
+
+```bash
+pip install raia
+```
 
 ## 3. Usage
 raia formats text through Formatter objects. All Formatter objects have two ways to format text:
@@ -64,7 +68,7 @@ print(raia.Brown_bg('Available styles keys:\n'), raia.styles.keys())
 ```
 Output:
 
-<img width="686" alt="image" src="https://github.com/user-attachments/assets/42ed0409-b648-4b9d-9627-1e76a5d8a1ba">
+<img width="572" alt="image" src="https://github.com/user-attachments/assets/d53079df-5a71-4bb9-aa44-0d6750a6a0a7">
 
 
 
