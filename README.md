@@ -74,4 +74,4 @@ Output:
 
 
 
-**Important Note**: Not all styles work on all consoles
+**Important Note**: Not all styles work on all consoles.
