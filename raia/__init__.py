@@ -7,4 +7,4 @@ e-mail: alexstrat4@gmail.com
 """
 from .default import *
 from .rgb import *
-__version__ = '0.1.0'
+__version__ = '0.1.1'
