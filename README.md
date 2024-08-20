@@ -69,14 +69,12 @@ myFullStyle = raia.FullStyle(foreground=raia.Violet, background=(
 myFullStyle.fprint('This is a custom fully styled text.')
 
 # Default keys
-print(raia.Green('Default color keys: \n'), raia.defaults.keys())
-print(raia.Brown_bg('Available styles keys:\n'), raia.styles.keys())
-
+print(raia.Green('Default color keys: \n'), [*raia.defaults])
+print(raia.Brown_bg('Available styles keys:\n'), [*raia.styles])
 ```
 Output:
 
-<img width="944" alt="image" src="https://github.com/user-attachments/assets/b035628a-616a-4761-9f39-86c45af07b5a">
-
+<img width="944" alt="image" src="https://github.com/user-attachments/assets/ee4e116f-e9fe-4be3-9123-979d0e6bafa3">
 
 
 
