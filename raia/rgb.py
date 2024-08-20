@@ -7,6 +7,7 @@ Licence: MIT
  
 Module with class definitions of all the Formatter objects.
 """
+import warnings
 # Definitions for the RGB codes.
 CSI = '\033['
 END = 'm'
@@ -59,7 +60,7 @@ defaults = {
 }
 
 
-class Formatter:
+class Formatter(object):
     """ Class that formats strings. It is ment to be used as a parent class for
     Style and Color classes. """
 
@@ -124,8 +125,17 @@ class Style(Formatter):
             None.
 
         """
+
         formatter = CSI
         for i, st in enumerate(args):
+
+            if st not in styles:
+                # Check if the key is valid.
+                warnings.warn(
+                    st +
+                    ' is not a valid style key. This argument will be ignored. The valid keys are '
+                    + str([*styles]))
+
             if i == 0:
                 deli = ''  # to not include ';' on the first style code.
             else:
@@ -150,22 +160,56 @@ class Color(Formatter):
             as_background (bool, optional): Setting True makes the Formatter apply on the background.
             Defaults to False, i.e. the Formatter formatting the foreground.
 
+        Raises:
+            ValueError: When the RGB input is outside [0,255]
+            TypeError: When RGB or is_background are not ints or bool respectively.
+
         Returns:
             None.
 
         """
-        self.is_background = as_background
-        self.r = str(Red)
-        self.g = str(Green)
-        self.b = str(Blue)
-
-        if self.is_background == False:
-            WHERE = FORE
+        # Examine the input first.
+        GOT_VALID_RGB_TYPES = isinstance(Red, int) and isinstance(
+            Green, int) and isinstance(Blue, int)
+        if GOT_VALID_RGB_TYPES:
+            # check if the valuea are in [0,255]
+            GOT_VALID_RGB_VALUES = Red >= 0 and Red <= 255 and Green >= 0 and Green <= 255 \
+                and Blue >= 0 and Blue <= 255
         else:
-            WHERE = BACK
+            # if non valid type ->
+            GOT_VALID_RGB_VALUES = False
+        GOT_VALID_BG = isinstance(as_background, bool)
+        # Is all valid:
+        GOT_VALID_INPUT = GOT_VALID_RGB_TYPES and GOT_VALID_RGB_VALUES and GOT_VALID_BG
 
-        formatter = CSI + WHERE + RGB + self.r+';'+self.g+';'+self.b+END
-        super().__init__(format_str=formatter)
+        if GOT_VALID_INPUT == True:
+            # proceed to create the Formatter
+            self.is_background = as_background
+            self.r = str(Red)
+            self.g = str(Green)
+            self.b = str(Blue)
+
+            if self.is_background == False:
+                WHERE = FORE
+            else:
+                WHERE = BACK
+
+            formatter = CSI + WHERE + RGB + self.r+';'+self.g+';'+self.b+END
+            super().__init__(format_str=formatter)
+        else:
+            # Errors and warnings.
+            if not GOT_VALID_RGB_TYPES:
+                # meaning the RGB part is invalid.
+                raise TypeError(
+                    "Red, Green and Blue only take integer values in [0,255] but, types " +
+                    str((type(Red), type(Green), type(Blue))) + ' were given')
+            elif not GOT_VALID_RGB_VALUES:
+                raise ValueError("Red, Green and Blue only take integer values in [0,255] but, values "
+                                 + str((Red, Green, Blue)) + " were given.")
+
+            else:
+                raise TypeError('as_background must be type bool but, type '
+                                + str(type(as_background)) + ' was given')
 
 
 class FullStyle(Formatter):
