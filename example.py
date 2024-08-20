@@ -36,5 +36,5 @@ myFullStyle = raia.FullStyle(foreground=raia.Violet, background=(
 myFullStyle.fprint('This is a custom fully styled text.')
 
 # Default keys
-print(raia.Green('Default color keys: \n'), raia.defaults.keys())
-print(raia.Brown_bg('Available styles keys:\n'), raia.styles.keys())
+print(raia.Green('Default color keys: \n'), [*raia.defaults])
+print(raia.Brown_bg('Available styles keys:\n'), [*raia.styles])
