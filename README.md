@@ -22,7 +22,7 @@ raia formats text through Formatter objects. All Formatter objects have two ways
     formatted_str = form ("raia Library")
     print(formatted_str)
     ```
-2. Using the fprint method that uses the builting print with the chosen formatting, i.e.
+2. Using the fprint method that uses the builtin print with the chosen formatting, i.e.
    ```python
    form = raia.Formatter("""some initialization""")
    form.fprint("raia Library")
