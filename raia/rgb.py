@@ -61,7 +61,7 @@ defaults = {
 
 
 class Formatter(object):
-    """ Class that formats strings. It is ment to be used as a parent class for
+    """ Class that formats strings. It is meant to be used as a parent class for
     Style and Color classes. """
 
     def __init__(self, format_str: str):
