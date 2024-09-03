@@ -71,10 +71,26 @@ myFullStyle.fprint('This is a custom fully styled text.')
 # Default keys
 print(raia.Green('Default color keys: \n'), [*raia.defaults])
 print(raia.Brown_bg('Available styles keys:\n'), [*raia.styles])
+
+# Some text with emojis
+Heart = raia.Emoji('<3')
+print('This prints a heart emoji: ' + Heart)
+
+Smiley = raia.Emoji(':)')
+pointRight = raia.Emoji('backhand_index_pointing_right')
+print(pointRight + "Emojis and " +
+      myFullStyle('Formatter objects') + ' can work together' + Smiley)
+
+
+print(raia.Lime('Full list of emojis:'))
+for emj_key in raia.emojis:
+    tmpEmoji = raia.Emoji(emj_key)
+    print(tmpEmoji, end='')
 ```
 Output:
 
-<img width="944" alt="image" src="https://github.com/user-attachments/assets/ee4e116f-e9fe-4be3-9123-979d0e6bafa3">
+![image](https://github.com/user-attachments/assets/267ae979-0e96-4709-96d9-972502a04d1d)
+
 
 
 
