@@ -8,6 +8,7 @@ Licence: MIT
 Module with class definitions of all the Formatter objects.
 """
 import warnings
+
 # Definitions for the RGB codes.
 CSI = '\033['
 END = 'm'
@@ -69,7 +70,7 @@ class Formatter(object):
         Initializer method of the Formater object.
 
         Args:
-            format_str (str): The the formatting ANSI-Truecolor code
+            format_str (str): The formatting ANSI-Truecolor code
 
         Returns:
             None.
@@ -79,7 +80,7 @@ class Formatter(object):
 
     def __call__(self, text: str) -> str:
         """
-        Call method for Formatter objects. It concatentates an input string with
+        Call method for Formatter objects. It concatenates an input string with
         the formating string.
 
         Args:
@@ -155,8 +156,8 @@ class Color(Formatter):
 
         Args:
             Red (int): Amount of red. Must be in [0,255]
-            Green (int): Amount of red. Must be in [0,255]
-            Blue (int): Amount of red. Must be in [0,255]
+            Green (int): Amount of green. Must be in [0,255]
+            Blue (int): Amount of blue. Must be in [0,255]
             as_background (bool, optional): Setting True makes the Formatter apply on the background.
             Defaults to False, i.e. the Formatter formatting the foreground.
 
@@ -172,9 +173,9 @@ class Color(Formatter):
         GOT_VALID_RGB_TYPES = isinstance(Red, int) and isinstance(
             Green, int) and isinstance(Blue, int)
         if GOT_VALID_RGB_TYPES:
-            # check if the valuea are in [0,255]
-            GOT_VALID_RGB_VALUES = Red >= 0 and Red <= 255 and Green >= 0 and Green <= 255 \
-                and Blue >= 0 and Blue <= 255
+            # check if the values are in [0,255]
+            GOT_VALID_RGB_VALUES = 0 <= Red <= 255 and 0 <= Green <= 255 \
+                                   and 0 <= Blue <= 255
         else:
             # if non valid type ->
             GOT_VALID_RGB_VALUES = False
@@ -182,19 +183,19 @@ class Color(Formatter):
         # Is all valid:
         GOT_VALID_INPUT = GOT_VALID_RGB_TYPES and GOT_VALID_RGB_VALUES and GOT_VALID_BG
 
-        if GOT_VALID_INPUT == True:
+        if GOT_VALID_INPUT:
             # proceed to create the Formatter
             self.is_background = as_background
             self.r = str(Red)
             self.g = str(Green)
             self.b = str(Blue)
 
-            if self.is_background == False:
+            if not self.is_background:
                 WHERE = FORE
             else:
                 WHERE = BACK
 
-            formatter = CSI + WHERE + RGB + self.r+';'+self.g+';'+self.b+END
+            formatter = CSI + WHERE + RGB + self.r + ';' + self.g + ';' + self.b + END
             super().__init__(format_str=formatter)
         else:
             # Errors and warnings.
@@ -221,12 +222,12 @@ class FullStyle(Formatter):
         Initializer of the FullStyle Formatter.
 
         Args:
-            foreground (Color | tuple[int, int, int]): The foreground color. The input can either be
-            a rea.rgb.Color object or an iterable with the 3 RGB codes.
-            background (Color | tuple[int, int, int]): The background color. The input can either be
-            a rea.rgb.Color(as_background=True) object or an iterable with the 3 RGB codes.
-            style (Style | tuple[str] | str): The style. The input can be either a rea.rgb.Style object or
-            an iterable containing keys from rea.rgb.styles.keys(). If a single key is given, it needs not be in a tuple.
+            foreground (Color | tuple[int, int, int]): The foreground color. The input can either be a rea.rgb.Color
+                object or an iterable with the 3 RGB codes.
+            background (Color | tuple[int, int, int]): The background color. The input can either be a
+                rea.rgb.Color(as_background=True) object or an iterable with the 3 RGB codes.
+            style (Style | tuple[str] | str): The style. The input can be either a rea.rgb.Style object or an iterable
+                containing keys from rea.rgb.styles.keys(). If a single key is given, it needs not be in a tuple.
 
         Raises:
             ValueError: When the input cannot be interpreted.
@@ -238,31 +239,31 @@ class FullStyle(Formatter):
 
         if isinstance(foreground, Color):
             fore_format = foreground.FORMATTER
-        elif foreground == None:
+        elif foreground is None:
             fore_format = ''
         elif isinstance(foreground, (list, tuple)) and len(foreground) == 3:
             fore_format = Color(*foreground).FORMATTER
 
         else:
-            raise ValueError("foreground must be a rea.Color object or an iterable of 3 integers.\
-                             However, type: " + str(type(foreground))) + ' was given.'
+            raise ValueError("foreground must be a rea.Color object or an iterable of 3 integers. However, type: " +
+                             str(type(foreground)) + ' was given.')
 
         if isinstance(background, Color) and background.is_background:
             back_format = background.FORMATTER
-        elif background == None:
+        elif background is None:
             back_format = ''
         elif isinstance(background, (list, tuple)) and len(background) == 3:
             back_format = Color(*background, as_background=True).FORMATTER
 
         else:
-            raise ValueError("background must be a rea.Color object with is_background ==True, or an iterable of 3 integers.\
-                             However, type: " + str(type(background))) + ' was given.'
+            raise ValueError("background must be a rea.Color object with is_background==True, or an iterable of 3 "
+                             "integers. However, type: " + str(type(background)) + ' was given.')
 
         if isinstance(style, Style):
             style_format = style.FORMATTER
-        elif style == None:
+        elif style is None:
             style_format = ''
-        elif isinstance(style,  (str, tuple)):
+        elif isinstance(style, (str, tuple)):
             if isinstance(style, str):
                 style_format = Style(style).FORMATTER
             else:
@@ -270,10 +271,10 @@ class FullStyle(Formatter):
                 style_format = Style(*style).FORMATTER
 
         else:
-            raise ValueError("style must be a rea.Style object or an iterable of styles's keywords.\
-                             However, type: " + str(type(style)) + ' was given.')
+            raise ValueError("style must be a rea.Style object or an iterable of style's keywords. However, type: " +
+                             str(type(style)) + ' was given.')
 
-        full_format = fore_format+back_format+style_format
+        full_format = fore_format + back_format + style_format
         super().__init__(format_str=full_format)
 
 
