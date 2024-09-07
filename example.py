@@ -32,7 +32,7 @@ myStyle.fprint('This is a custom style.')
 
 # Custom Full-Style
 myFullStyle = raia.FullStyle(foreground=raia.Violet, background=(
-    0, 80, 180),                           style=myStyle)
+    0, 80, 180), style=myStyle)
 myFullStyle.fprint('This is a custom fully styled text.')
 
 # Default keys
