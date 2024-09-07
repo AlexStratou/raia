@@ -1,6 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![PyPi](https://img.shields.io/pypi/v/raia.svg)](https://pypi.org/project/raia/)
 ![versions](https://img.shields.io/pypi/pyversions/raia.svg)
+[![Downloads](https://static.pepy.tech/badge/raia)](https://pepy.tech/project/raia)
 # Raia
 Simplistic python package to print colored/styled text and emojis with a user friendly API.
 
