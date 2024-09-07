@@ -8,8 +8,8 @@ Licence: MIT
 """
 from .rgb import *
 from .emoji import *
-__version__ = '0.4.0'
 
+__version__ = '0.4.1'
 
 for name in defaults.keys():
     # Make Color objects through the dictionary
@@ -20,4 +20,4 @@ for name in defaults.keys():
     locals()[name_bg] = Color(*defaults[name], as_background=True)
 
 for st in styles.keys():
-    locals()[st.capitalize()] = Style(st)
+    locals()[st.capitalize()] = Style(st)  # make first letter a Capital.
