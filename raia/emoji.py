@@ -177,7 +177,6 @@ emojis = {
     "skis": "\U0001F3BF",
     "snowboarder": "\U0001F3C2",
     "sled": "\U0001F6F7",
-    "snowflake": "\U00002744",
     "sunny": "\U00002600",
     "cloud": "\U00002601",
     "rainbow": "\U0001F308",
@@ -188,22 +187,12 @@ emojis = {
     "wind_face": "\U0001F32C",
     "umbrella": "\U00002602",
     "high_voltage": "\U000026A1",
-    "snowman": "\U000026C4",
     "snowman_without_snow": "\U0001F928",
     "sun_with_face": "\U0001F31E",
     "star": "\U00002B50",
     "star2": "\U0001F31F",
     "dizzy": "\U0001F4AB",
-    "sparkles": "\U00002728",
-    "fireworks": "\U0001F386",
-    "sparkler": "\U0001F387",
-    "balloon": "\U0001F388",
-    "tada": "\U0001F389",
-    "confetti_ball": "\U0001F38A",
-    "party_popper": "\U0001F389",
     "ribbon": "\U0001F380",
-    "gift": "\U0001F381",
-    "christmas_tree": "\U0001F384",
     "tree": "\U0001F333",
     "deciduous_tree": "\U0001F333",
     "palm_tree": "\U0001F334",
@@ -221,14 +210,9 @@ emojis = {
     "last_quarter_moon": "\U0001F319",
     "moon_cake": "\U0001F96F",
     "sun": "\U0001F31E",
-    "sunny": "\U00002600",
     "partly_sunny": "\U000026C5",
     "cloud_with_rain": "\U0001F327",
-    "thunder_cloud_and_rain": "\U000026C8",
-    "snowflake": "\U00002744",
-    "snowman": "\U000026C4",
     "comet": "\U000026C4",
-    "rainbow": "\U0001F308",
     "mountain_snow": "\U0001F3D4",
     "desert": "\U0001F3DC",
     "beach_umbrella": "\U0001F3D6",
@@ -253,21 +237,6 @@ emojis = {
     "hibiscus": "\U0001F33A",
     "tulip": "\U0001F337",
     "seedling": "\U0001F331",
-    "pineapple": "\U0001F34D",
-    "banana": "\U0001F34C",
-    "watermelon": "\U0001F349",
-    "grapes": "\U0001F347",
-    "strawberry": "\U0001F353",
-    "cherry": "\U0001F352",
-    "peach": "\U0001F351",
-    "apple": "\U0001F34E",
-    "orange": "\U0001F34A",
-    "lemon": "\U0001F34B",
-    "pear": "\U0001F350",
-    "avocado": "\U0001F951",
-    "carrot": "\U0001F955",
-    "corn": "\U0001F33D",
-    "potato": "\U0001F954",
     "red_heart": "\U0001F497",
     "orange_heart": "\U0001F9E1",
     "yellow_heart": "\U0001F49B",
@@ -305,7 +274,6 @@ emojis = {
     "backhand_index_pointing_up": "\U0001F446",
     "backhand_index_pointing_down": "\U0001F447",
     "raised_back_of_hand": "\U0001F91A",
-    "writing_hand": "\U0000270D",
     "pinching_hand": "\U0001F90F",
     "vulcan_salute": "\U0001F596",
     "ok_hand_sign": "\U0001F44C",
@@ -314,9 +282,7 @@ emojis = {
     "raised_hand_with_fingers_splayed": "\U0001F590",
     "hand_with_index_finger_and_thumb_crossed": "\U0001F91E",
     "call_me_hand": "\U0001F919",
-    "ok_hand_sign": "\U0001F44C",
-
-    # some codes from text
+    # some codes from text emojis
     ":)": "\U0001F642",          # Smiling face
     ":(": "\U0001F641",          # Frowning face
     ":D": "\U0001F603",          # Grinning face with big eyes
@@ -352,8 +318,8 @@ class Emoji(object):
         """
         Initializer of the Emoji class.
 
-        Args:
-            *args (str): Name or names of emojis as str. Valid names are in raia.emoji.emojis.keys(). Invalid input will raise a warning.
+        Args: *args (str): Name or names of emojis as str. Valid names are in raia.emoji.emojis.keys(). Invalid input
+        will raise a warning.
 
         Returns:
             None.
@@ -378,7 +344,7 @@ class Emoji(object):
         return str(self) + string
 
     def __radd__(self, string):
-        """ to make addition to a string ascociative"""
+        """ to make addition to a string associative"""
         return string + str(self)
 
 
