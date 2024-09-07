@@ -2,10 +2,10 @@
 [![PyPi](https://img.shields.io/pypi/v/raia.svg)](https://pypi.org/project/raia/)
 ![versions](https://img.shields.io/pypi/pyversions/raia.svg)
 # Raia
-Simplistic python package to print colored and/or styled text with a user friendly API.
+Simplistic python package to print colored/styled text and emojis with a user friendly API.
 
 ## 1. Introduction
-raia is a simplistic python package that intends to provide a user friendly API for printing formatted text on the terminal. To do so, raia uses ANSI RGB codes (as many similar packages do). Truecolor ANSI support of the running terminal is assumed.
+Raia is a simplistic python package that intends to provide a user friendly API for printing formatted text on the terminal. To do so, raia uses ANSI RGB codes (as many similar packages do). Truecolor ANSI support of the running terminal is assumed.
 
 ## 2. Installation
 Using pip,
@@ -15,25 +15,93 @@ pip install raia
 ```
 
 ## 3. Usage
-raia formats text through Formatter objects. All Formatter objects have two ways to format text:
+
+### 3.1 Text formatting
+
+Raia formats text through Formatter objects. All Formatter objects have two ways to format text:
 1. Used as a callable, i.e.
    ```python
-    form = raia.Formatter("""some initialization""")
-    formatted_str = form ("raia Library")
+    initialization = 'some initialization'
+    form = raia.Formatter(initialization)
+    formatted_str = form("raia package")
     print(formatted_str)
     ```
 2. Using the fprint method that uses the builtin print with the chosen formatting, i.e.
    ```python
-   form = raia.Formatter("""some initialization""")
-   form.fprint("raia Library")
+   initialization = 'some initialization'
+   form = raia.Formatter(initialization)
+   form.fprint("raia package")
    ```
-Both of these have the same output (printed "raia Library" with the formatting specified in """some initialization""").
+Both of these have the same output (printed "raia package" with the formatting specified in the initialization string).
 
 The Formatter object is initialized by a string  of the ANSI escape code for the chosen formating, e.g. for printing red text we would initialize with:
 ```python
 Red = raia.Formatter("\x1b[38;2;255;0;0m")
 ```
 To bereft the user of having anything to do with such codes, raia provides the Style, Color, FullStyle subclasses of the Formatter class. With them, the user just has to specify the necessary information (e.g. for Color the amounts of RGB, see example below).
+```python
+customBlue = raia.Color(50,150,250)
+customBlue.fprint('Some blue text')
+```
+Output:
+
+![image](https://github.com/user-attachments/assets/a2c53fb7-6848-422d-a437-786e1d058388)
+
+To use a color as background, one must specify it in the initialization of the Color object as,
+
+```python
+customBlueBG = raia.Color(50,150,250, as_background=True)
+customBlueBG.fprint('Some text in blue background')
+```
+
+Output:
+
+![image](https://github.com/user-attachments/assets/50b1c895-54b8-4681-a9a1-c4684edae958)
+
+
+
+For commonly used colors and styles, some Color and Style objects are pre-initialized and can be used out of the box.
+For example,
+
+```python
+print(raia.Red('This is red.'), raia.Underline('This is undeline.'))
+```
+is equivalent to,
+```python
+Red = raia.Color(255,0,0) # or  = raia.Color('Red')
+Underline = raia.Style('underline')
+print(Red('This is red.'), Underline('This is undeline.'))
+```
+with output:
+
+![image](https://github.com/user-attachments/assets/868e3806-2843-46a4-8136-fb5b151debba)
+
+A full list of these default color/style keys can be found in 
+```python
+raia.defaults.keys() # default colors
+raia.styles.keys()
+```
+
+___
+
+### 3.2 Emojis
+
+The emoji functionality, is implemented through Emoji objets. For example,
+```python
+Heart = raia.Emoji('<3')
+Cookie = raia.Emoji('cookie')
+print('I ' + Heart + ' ' + Cookie + '!')
+```
+Output:
+
+I ❤  🍪!
+
+A full list of currently supported emojis can be found in
+```python
+raia.emojis.keys()
+```
+
+For more concreate usage examples check the example.py script.
 
 ## 4. example.py
 Below, you can see the code and output of the script example.py. 
