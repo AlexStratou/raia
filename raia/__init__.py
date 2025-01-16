@@ -2,14 +2,14 @@
 """
 Created on Thu Aug 15 2024
 Author: Alexandros Stratoudakis
-e-mail: alexstrat4@gmail.com
+e-mail: alex.stratoudakis@proton.me
 Licence: MIT
 
 """
 from .rgb import *
 from .emoji import *
 
-__version__ = '0.4.1'
+__version__ = '0.4.2'
 
 for name in defaults.keys():
     # Make Color objects through the dictionary
